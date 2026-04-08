@@ -11,5 +11,7 @@ namespace api_gerenciamento_tarefas.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+
+        public DbSet<Domain.Entities.TarefaItem> TarefaItem { get; set; }
     }
 }
