@@ -12,6 +12,9 @@ namespace api_gerenciamento_tarefas.Data
         {
         }
 
-        public DbSet<Domain.Entities.TarefaItem> TarefaItem { get; set; }
+        public DbSet<Domain.Entities.TaskItem> TaskItem { get; set; }
+        public DbSet<Domain.Entities.User> User { get; set; }
+        public DbSet<Domain.Entities.SubTask> SubTask { get; set; }
+        public DbSet<Domain.Entities.Project> Project { get; set; }
     }
 }
