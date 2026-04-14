@@ -19,22 +19,16 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
         public async Task AddAsync(SubTask subTask)
         {
             await _context.SubTask.AddAsync(subTask);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(SubTask subtask)
         {
-            var subTask = await _context.SubTask.FindAsync(id);
-            if (subTask != null)
-            {
-                _context.SubTask.Remove(subTask);
-                await _context.SaveChangesAsync();
-            }
+           _context.SubTask.Remove(subtask);
         }
 
         public async Task<List<SubTask>> GetAllAsync()
         {
-            return await _context.SubTask.ToListAsync();
+           return await _context.SubTask.ToListAsync();
         }
 
         public async Task<SubTask?> GetByIdAsync(Guid id)
@@ -45,8 +39,6 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
         public async Task UpdateAsync(SubTask subTask)
         {
             _context.SubTask.Update(subTask);
-            await _context.SaveChangesAsync();
         }
-        
     }
 }

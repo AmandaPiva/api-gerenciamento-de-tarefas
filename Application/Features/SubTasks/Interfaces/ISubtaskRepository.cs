@@ -12,6 +12,6 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Interfaces
         Task<List<SubTask>> GetAllAsync();
         Task AddAsync(SubTask subTask);
         Task UpdateAsync(SubTask subTask);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(SubTask subTask);
     }
 }

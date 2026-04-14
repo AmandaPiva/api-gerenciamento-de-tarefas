@@ -12,7 +12,6 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Interfaces
         public Task<List<TaskItem>> GetAllAsync();
         public Task AddAsync(TaskItem taskItem);
         public Task UpdateAsync(TaskItem taskItem);
-        public Task DeleteAsync(Guid id);
-        public Task<SubTask?> AddSubTaskToTaskAsync(Guid taskId, SubTask subTask);
+        public Task DeleteAsync(TaskItem taskItem);
     }
 }
