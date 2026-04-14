@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api_gerenciamento_tarefas.Application.Features.Projects.DTO;
 using api_gerenciamento_tarefas.Application.Features.Projects.Interfaces;
 using api_gerenciamento_tarefas.Application.Interfaces;
 using api_gerenciamento_tarefas.Domain.Entities;
@@ -16,22 +17,49 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Project?> GetByIdAsync(Guid id)
+        public async Task<ProjectResponseDto?> GetByIdAsync(Guid id)
         {
             var project = await _unitOfWork.ProjectRepository.GetByIdAsync(id);
             if (project == null)
                 throw new Exception("Projeto não encontrado.");
-            return project;
+                
+            return new ProjectResponseDto
+            {
+                Id = project.Id,
+                Name = project.Name,
+                Description = project.Description,
+                CreationDate = project.CreationDate,
+                CompletionDate = project.CompletionDate,
+                Completed = project.Completed
+            };
         }
 
-        public async Task<List<Project>> GetAllAsync()
+        public async Task<List<ProjectResponseDto>> GetAllAsync()
         {
-            return await _unitOfWork.ProjectRepository.GetAllAsync();
+            var projects = await _unitOfWork.ProjectRepository.GetAllAsync();
+            return projects.Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                CreationDate = p.CreationDate,
+                CompletionDate = p.CompletionDate,
+                Completed = p.Completed
+            }).ToList();
         }
 
-        public async Task<Project> AddAsync(Project project)
+        public async Task<Project> AddAsync(CreateProjectDto dto)
         {
-             if (string.IsNullOrWhiteSpace(project.Name))
+            var project = new Project
+            {
+                Id = Guid.NewGuid(),
+                Name = dto.Name,
+                Description = dto.Description,
+                CreationDate = DateTime.UtcNow,
+                CompletionDate = dto.CompletionDate,
+                Completed = dto.Completed
+            };
+            if (string.IsNullOrWhiteSpace(project.Name))
                 throw new Exception("O nome do projeto é obrigatório.");
 
             await _unitOfWork.ProjectRepository.AddAsync(project);
@@ -41,20 +69,16 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
             return project;
         }
 
-        public async Task UpdateAsync(Project project)
+        public async Task UpdateAsync(UpdateProjectDto dto)
         {
-            if (project == null)
-                throw new ArgumentNullException(nameof(project));
-
-            var existingProject = await _unitOfWork.ProjectRepository.GetByIdAsync(project.Id);
-            
+            var existingProject = await _unitOfWork.ProjectRepository.GetByIdAsync(dto.Id);
             if (existingProject == null)
                 throw new Exception("Projeto não encontrado.");
-
-            existingProject.Name = project.Name;
-            existingProject.Description = project.Description;
-            existingProject.CompletionDate = project.CompletionDate;
-            existingProject.Completed = project.Completed;
+           
+            existingProject.Name = dto.Name;
+            existingProject.Description = dto.Description;
+            existingProject.CompletionDate = dto.CompletionDate;
+            existingProject.Completed = dto.Completed;
 
             await _unitOfWork.ProjectRepository.UpdateAsync(existingProject);
             await _unitOfWork.SaveChangesAsync();
