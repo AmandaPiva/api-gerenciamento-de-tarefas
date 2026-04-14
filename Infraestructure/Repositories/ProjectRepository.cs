@@ -19,29 +19,23 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
         public async Task AddAsync(Project project)
         {
             await _context.Project.AddAsync(project);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task<TaskItem?> AddTaskToProjectAsync(Guid projectId, TaskItem task)
-        {
-            var project = await _context.Project.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == projectId);
-            if (project != null)
-            {
-                project.Tasks.Add(task);
-                await _context.SaveChangesAsync();
-                return task;
-            }
-            return null;
-        }
+        // public async Task<TaskItem?> AddTaskToProjectAsync(Guid projectId, TaskItem task)
+        // {
+        //     var project = await _context.Project.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == projectId);
+        //     if (project != null)
+        //     {
+        //         project.Tasks.Add(task);
+        //         await _context.SaveChangesAsync();
+        //         return task;
+        //     }
+        //     return null;
+        // }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Project project)
         {
-            var project = await _context.Project.FindAsync(id);
-            if (project != null)
-            {
-                _context.Project.Remove(project);
-                await _context.SaveChangesAsync();
-            }
+           _context.Project.Remove(project);            
         }
 
         public async Task<List<Project>> GetAllAsync()
@@ -57,7 +51,6 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
         public async Task UpdateAsync(Project project)
         {
             _context.Project.Update(project);
-            await _context.SaveChangesAsync();
         }
     }
 }
