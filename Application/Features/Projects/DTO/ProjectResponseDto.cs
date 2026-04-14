@@ -13,5 +13,6 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.DTO
         public DateTime CreationDate { get; set; }
         public DateTime? CompletionDate { get; set; }
         public bool Completed { get; set; }
+        public Guid UserId { get; set; } // FK do Usuário
     }
 }

@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api_gerenciamento_tarefas.Application.Features.SubTasks.DTO;
 
-namespace api_gerenciamento_tarefas.Domain.Entities
+namespace api_gerenciamento_tarefas.Application.Features.Tasks.DTO
 {
-    public class Project
+    public class CreateTaskItemDto
     {
         public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime CreationDate { get; set; }
         public DateTime? CompletionDate { get; set; }
         public bool Completed { get; set; }
-        public Guid UserId { get; set; } // FK do Usuário
-        public List<TaskItem> Tasks { get; set; } = new List<TaskItem>();
+        public bool IsPriority { get; set; }
+        public Guid ProjectId { get; set; }  // FK do Projeto
     }
 }
