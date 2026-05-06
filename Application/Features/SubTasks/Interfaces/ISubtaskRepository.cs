@@ -8,10 +8,10 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Interfaces
 {
     public interface ISubtaskRepository
     {
-        Task<SubTask?> GetByIdAsync(Guid id);
-        Task<List<SubTask>> GetAllAsync();
-        Task AddAsync(SubTask subTask);
-        Task UpdateAsync(SubTask subTask);
-        Task DeleteAsync(SubTask subTask);
+        public Task<SubTask?> GetByIdAsync(Guid id);
+        public Task<List<SubTask>> GetAllAsync();
+        public Task AddAsync(SubTask subTask);
+        public Task UpdateAsync(SubTask subTask);
+        public Task DeleteAsync(SubTask subTask);
     }
 }

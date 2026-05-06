@@ -63,7 +63,6 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
                 throw new Exception("O nome do projeto é obrigatório.");
 
             await _unitOfWork.ProjectRepository.AddAsync(project);
-
             await _unitOfWork.SaveChangesAsync();
 
             return project;

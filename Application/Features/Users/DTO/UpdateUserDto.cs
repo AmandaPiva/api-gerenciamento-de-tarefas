@@ -7,6 +7,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.DTO
 {
     public class UpdateUserDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
     }

@@ -7,6 +7,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.DTO
 {
     public class UpdateTaskItemDto
     {
+        public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime? CompletionDate { get; set; }
