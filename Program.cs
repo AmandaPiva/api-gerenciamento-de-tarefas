@@ -7,6 +7,7 @@ using api_gerenciamento_tarefas.Infraestructure.Repositories;
 using api_gerenciamento_tarefas.Application.Features.Tasks.Interfaces;
 using api_gerenciamento_tarefas.Application.Features.SubTasks.Interfaces;
 using api_gerenciamento_tarefas.Application.Features.Projects.Services;
+using api_gerenciamento_tarefas.Application.Features.Users.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ITaskItemRepository, TaskRepository>();
 builder.Services.AddScoped<ISubtaskRepository, SubtaskRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Services
 builder.Services.AddScoped<ProjectService>();

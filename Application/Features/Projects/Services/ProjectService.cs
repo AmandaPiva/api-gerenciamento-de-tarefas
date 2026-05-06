@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_gerenciamento_tarefas.Application.Features.Projects.DTO;
 using api_gerenciamento_tarefas.Application.Features.Projects.Interfaces;
+using api_gerenciamento_tarefas.Application.Features.Tasks.DTO;
 using api_gerenciamento_tarefas.Application.Interfaces;
 using api_gerenciamento_tarefas.Domain.Entities;
 
@@ -81,6 +82,30 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
 
             await _unitOfWork.ProjectRepository.UpdateAsync(existingProject);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<TaskItem> AddTaskToProjectAsync(Guid projectId, CreateTaskItemDto taskItem)
+        {
+            var task = new TaskItem
+            {
+                Id = Guid.NewGuid(),
+                Title = taskItem.Title,
+                Description = taskItem.Description,
+                CreationDate = DateTime.UtcNow,
+                CompletionDate = taskItem.CompletionDate,
+                Completed = taskItem.Completed,
+                IsPriority = taskItem.IsPriority,
+            };
+
+            if (string.IsNullOrWhiteSpace(task.Title))
+                throw new Exception("O título da tarefa é obrigatório.");
+
+            var addedTask = await _unitOfWork.ProjectRepository.AddTaskToProjectAsync(projectId, task);
+            if (addedTask == null)
+                throw new Exception("Projeto não encontrado para adicionar a tarefa.");
+
+            await _unitOfWork.SaveChangesAsync();
+            return addedTask;
         }
 
         public async Task DeleteAsync(Guid id)

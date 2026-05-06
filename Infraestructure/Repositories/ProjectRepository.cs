@@ -21,17 +21,18 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
             await _context.Project.AddAsync(project);
         }
 
-        // public async Task<TaskItem?> AddTaskToProjectAsync(Guid projectId, TaskItem task)
-        // {
-        //     var project = await _context.Project.Include(p => p.Tasks).FirstOrDefaultAsync(p => p.Id == projectId);
-        //     if (project != null)
-        //     {
-        //         project.Tasks.Add(task);
-        //         await _context.SaveChangesAsync();
-        //         return task;
-        //     }
-        //     return null;
-        // }
+        public async Task<TaskItem?> AddTaskToProjectAsync(Guid projectId, TaskItem task)
+        {
+            await _context.TaskItem.AddAsync(task);
+            var project = await _context.Project.FindAsync(projectId);
+            if (project != null)
+            {
+                project.Tasks.Add(task);
+                await _context.SaveChangesAsync();
+                return task;
+            }
+            return null;
+        }
 
         public async Task DeleteAsync(Project project)
         {
