@@ -157,3 +157,6 @@ C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\ru\Microsoft.Co
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
