@@ -60,9 +60,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
                 CompletionDate = dto.CompletionDate,
                 Completed = dto.Completed
             };
-            if (string.IsNullOrWhiteSpace(project.Name))
-                throw new Exception("O nome do projeto é obrigatório.");
-
+           
             await _unitOfWork.ProjectRepository.AddAsync(project);
             await _unitOfWork.SaveChangesAsync();
 
@@ -97,13 +95,10 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
                 IsPriority = taskItem.IsPriority,
             };
 
-            if (string.IsNullOrWhiteSpace(task.Title))
-                throw new Exception("O título da tarefa é obrigatório.");
-
             var addedTask = await _unitOfWork.ProjectRepository.AddTaskToProjectAsync(projectId, task);
             if (addedTask == null)
                 throw new Exception("Projeto não encontrado para adicionar a tarefa.");
-
+           
             await _unitOfWork.SaveChangesAsync();
             return addedTask;
         }

@@ -50,13 +50,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.Services
                 Email = dto.Email,
                 PasswordHash = dto.PasswordHash
             };
-            if (string.IsNullOrWhiteSpace(user.Name))
-                throw new Exception("O nome do usuário é obrigatório.");
-            if (string.IsNullOrWhiteSpace(user.Email))
-                throw new Exception("O email do usuário é obrigatório.");
-            if (string.IsNullOrWhiteSpace(user.PasswordHash))
-                throw new Exception("A senha do usuário é obrigatória.");
-
+          
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.SaveChangesAsync();
             return user;
@@ -67,7 +61,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.Services
             var existingUser = await _unitOfWork.UserRepository.GetByIdAsync(dto.Id);
             if (existingUser == null)
                 throw new Exception("Usuário não encontrado.");
-
+           
             existingUser.Name = dto.Name;
             existingUser.Email = dto.Email;
 
@@ -80,7 +74,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user == null)
                 throw new Exception("Usuário não encontrado.");
-
+           
             await _unitOfWork.UserRepository.DeleteAsync(user);
             await _unitOfWork.SaveChangesAsync();
         }

@@ -64,9 +64,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
                 IsPriority = dto.IsPriority,
                 ProjectId = dto.ProjectId
             };
-            if (string.IsNullOrWhiteSpace(taskItem.Title))
-                throw new Exception("O título da tarefa é obrigatório.");
-
+           
             await _unitOfWork.TaskItemRepository.AddAsync(taskItem);
             await _unitOfWork.SaveChangesAsync();
             return taskItem;
@@ -77,7 +75,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
             var existingTaskItem = await _unitOfWork.TaskItemRepository.GetByIdAsync(dto.Id);
             if (existingTaskItem == null)
                 throw new Exception("Tarefa não encontrada.");
-
+           
             existingTaskItem.Title = dto.Title;
             existingTaskItem.Description = dto.Description;
             existingTaskItem.CompletionDate = dto.CompletionDate;
@@ -91,9 +89,10 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
         public async Task DeleteAsync(Guid id)
         {
             var taskItem = await _unitOfWork.TaskItemRepository.GetByIdAsync(id);
+
             if (taskItem == null)
                 throw new Exception("Tarefa não encontrada.");
-
+                
             await _unitOfWork.TaskItemRepository.DeleteAsync(taskItem);
             await _unitOfWork.SaveChangesAsync();
         }

@@ -50,9 +50,7 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Services
                 isCompleted = dto.IsCompleted,
                 TaskId = dto.TaskId
             };
-            if (string.IsNullOrWhiteSpace(subTask.title))
-                throw new Exception("O título da subtarefa é obrigatório.");
-
+          
             await _unitOfWork.SubtaskRepository.AddAsync(subTask);
             await _unitOfWork.SaveChangesAsync();
             return subTask;
@@ -76,7 +74,7 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Services
             var subTask = await _unitOfWork.SubtaskRepository.GetByIdAsync(id);
             if (subTask == null)
                 throw new Exception("Subtarefa não encontrada.");
-
+           
             await _unitOfWork.SubtaskRepository.DeleteAsync(subTask);
             await _unitOfWork.SaveChangesAsync();
         }
