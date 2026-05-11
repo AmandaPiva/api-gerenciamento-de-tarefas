@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api_gerenciamento_tarefas.Api.Controllers
 {
     [ApiController]
-    [Route("api/Projects/[controller]")]
+    [Route("api/[controller]")]
     public class ProjectController : ControllerBase
     {
         private readonly ProjectService _projectService;
@@ -38,7 +38,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
         public async Task<IActionResult> AddAsync([FromBody] CreateProjectDto dto)
         {
             var project = await _projectService.AddAsync(dto);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = project.Id }, project);
+            return Ok(project);
         }
 
         [HttpPut("/UpdateProject/{id}")]
@@ -55,7 +55,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
         public async Task<IActionResult> AddTaskToProjectAsync(Guid projectId, [FromBody] CreateTaskItemDto dto)
         {
             var task = await _projectService.AddTaskToProjectAsync(projectId, dto);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = task.Id }, task);
+            return Ok(task);
         }
 
         [HttpDelete("{id}")]

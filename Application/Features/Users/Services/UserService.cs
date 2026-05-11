@@ -8,10 +8,10 @@ using api_gerenciamento_tarefas.Domain.Entities;
 
 namespace api_gerenciamento_tarefas.Application.Features.Users.Services
 {
-    public class UserService
+    public class UsersService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUnitOfWork unitOfWork)
+        public UsersService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

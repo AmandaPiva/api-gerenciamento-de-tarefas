@@ -160,3 +160,6 @@ C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\zh-Hant\Microso
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.dll
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
