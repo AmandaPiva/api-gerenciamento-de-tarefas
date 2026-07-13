@@ -23,32 +23,14 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
             var project = await _unitOfWork.ProjectRepository.GetByIdAsync(id);
             if (project == null)
                 throw new Exception("Projeto não encontrado.");
-                
-            return new ProjectResponseDto
-            {
-                Id = project.Id,
-                Name = project.Name,
-                Description = project.Description,
-                CreationDate = project.CreationDate,
-                CompletionDate = project.CompletionDate,
-                Completed = project.Completed,
-                UserId = project.UserId
-            };
+
+            return MapToResponseDto(project);
         }
 
         public async Task<List<ProjectResponseDto>> GetAllAsync()
         {
             var projects = await _unitOfWork.ProjectRepository.GetAllAsync();
-            return projects.Select(p => new ProjectResponseDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                CreationDate = p.CreationDate,
-                CompletionDate = p.CompletionDate,
-                Completed = p.Completed,
-                UserId = p.UserId
-            }).ToList();
+            return projects.Select(MapToResponseDto).ToList();
         }
 
         public async Task<Project> AddAsync(CreateProjectDto dto)
@@ -115,6 +97,20 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Services
 
             await _unitOfWork.ProjectRepository.DeleteAsync(project);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private static ProjectResponseDto MapToResponseDto(Project project)
+        {
+            return new ProjectResponseDto
+            {
+                Id = project.Id,
+                Name = project.Name,
+                Description = project.Description,
+                CreationDate = project.CreationDate,
+                CompletionDate = project.CompletionDate,
+                Completed = project.Completed,
+                UserId = project.UserId
+            };
         }
     }
 }

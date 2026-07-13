@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api_gerenciamento_tarefas.Application.Features.Tasks.DTO;
+using api_gerenciamento_tarefas.Application.Features.Tasks.Interfaces;
 using api_gerenciamento_tarefas.Application.Interfaces;
 using api_gerenciamento_tarefas.Domain.Entities;
 
 namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
 {
-    public class TaskItemService
+    public class TaskItemService : ITaskItemService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public TaskItemService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -20,38 +22,18 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
         {
             var taskItem = await _unitOfWork.TaskItemRepository.GetByIdAsync(id);
             if (taskItem == null)
-                throw new Exception("Tarefa não encontrada.");
-                
-            return new TaskItemResponseDto
-            {
-                Id = taskItem.Id,
-                Title = taskItem.Title,
-                Description = taskItem.Description,
-                CreationDate = taskItem.CreationDate,
-                CompletionDate = taskItem.CompletionDate,
-                Completed = taskItem.Completed,
-                IsPriority = taskItem.IsPriority,
-                ProjectId = taskItem.ProjectId
-            };
+                throw new KeyNotFoundException("Tarefa não encontrada.");
+
+            return MapToResponseDto(taskItem);
         }
 
         public async Task<List<TaskItemResponseDto>> GetAllAsync()
         {
             var taskItems = await _unitOfWork.TaskItemRepository.GetAllAsync();
-            return taskItems.Select(t => new TaskItemResponseDto
-            {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                CreationDate = t.CreationDate,
-                CompletionDate = t.CompletionDate,
-                Completed = t.Completed,
-                IsPriority = t.IsPriority,
-                ProjectId = t.ProjectId
-            }).ToList();
+            return taskItems.Select(MapToResponseDto).ToList();
         }
 
-        public async Task<TaskItem> AddAsync(CreateTaskItemDto dto)
+        public async Task<TaskItemResponseDto> AddAsync(CreateTaskItemDto dto)
         {
             var taskItem = new TaskItem
             {
@@ -64,18 +46,18 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
                 IsPriority = dto.IsPriority,
                 ProjectId = dto.ProjectId
             };
-           
+
             await _unitOfWork.TaskItemRepository.AddAsync(taskItem);
             await _unitOfWork.SaveChangesAsync();
-            return taskItem;
+            return MapToResponseDto(taskItem);
         }
 
         public async Task UpdateAsync(UpdateTaskItemDto dto)
         {
             var existingTaskItem = await _unitOfWork.TaskItemRepository.GetByIdAsync(dto.Id);
             if (existingTaskItem == null)
-                throw new Exception("Tarefa não encontrada.");
-           
+                throw new KeyNotFoundException("Tarefa não encontrada.");
+
             existingTaskItem.Title = dto.Title;
             existingTaskItem.Description = dto.Description;
             existingTaskItem.CompletionDate = dto.CompletionDate;
@@ -89,12 +71,26 @@ namespace api_gerenciamento_tarefas.Application.Features.Tasks.Services
         public async Task DeleteAsync(Guid id)
         {
             var taskItem = await _unitOfWork.TaskItemRepository.GetByIdAsync(id);
-
             if (taskItem == null)
-                throw new Exception("Tarefa não encontrada.");
-                
+                throw new KeyNotFoundException("Tarefa não encontrada.");
+
             await _unitOfWork.TaskItemRepository.DeleteAsync(taskItem);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private static TaskItemResponseDto MapToResponseDto(TaskItem taskItem)
+        {
+            return new TaskItemResponseDto
+            {
+                Id = taskItem.Id,
+                Title = taskItem.Title,
+                Description = taskItem.Description,
+                CreationDate = taskItem.CreationDate,
+                CompletionDate = taskItem.CompletionDate,
+                Completed = taskItem.Completed,
+                IsPriority = taskItem.IsPriority,
+                ProjectId = taskItem.ProjectId
+            };
         }
     }
 }

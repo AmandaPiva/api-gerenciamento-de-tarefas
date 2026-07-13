@@ -21,24 +21,14 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user == null)
                 throw new Exception("Usuário não encontrado.");
-                
-            return new UserResponseDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email
-            };
+
+            return MapToResponseDto(user);
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
         {
             var users = await _unitOfWork.UserRepository.GetAllAsync();
-            return users.Select(u => new UserResponseDto
-            {
-                Id = u.Id,
-                Name = u.Name,
-                Email = u.Email
-            }).ToList();
+            return users.Select(MapToResponseDto).ToList();
         }
 
         public async Task<User> AddAsync(CreateUserDto dto)
@@ -74,9 +64,19 @@ namespace api_gerenciamento_tarefas.Application.Features.Users.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user == null)
                 throw new Exception("Usuário não encontrado.");
-           
+
             await _unitOfWork.UserRepository.DeleteAsync(user);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private static UserResponseDto MapToResponseDto(User user)
+        {
+            return new UserResponseDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email
+            };
         }
     }
 }

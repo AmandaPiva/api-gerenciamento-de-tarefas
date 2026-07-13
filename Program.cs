@@ -10,6 +10,8 @@ using api_gerenciamento_tarefas.Application.Features.Projects.Services;
 using api_gerenciamento_tarefas.Application.Features.Users.Interfaces;
 using FluentValidation.AspNetCore;
 using api_gerenciamento_tarefas.Application.Features.Users.Services;
+using api_gerenciamento_tarefas.Application.Features.Tasks.Services;
+using api_gerenciamento_tarefas.Application.Features.SubTasks.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,8 +33,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Services
 builder.Services.AddScoped<ProjectService>();
-builder.Services.AddScoped<TaskItemService>();
-builder.Services.AddScoped<SubtaskService>();
+builder.Services.AddScoped<ITaskItemService, TaskItemService>();
+builder.Services.AddScoped<SubTaskService>();
 builder.Services.AddScoped<UsersService>();
 
 // Controller
@@ -50,15 +52,3 @@ if (app.Environment.IsDevelopment())
 }
 
 app.Run();
-
-internal class UserService
-{
-}
-
-internal class SubtaskService
-{
-}
-
-internal class TaskItemService
-{
-}

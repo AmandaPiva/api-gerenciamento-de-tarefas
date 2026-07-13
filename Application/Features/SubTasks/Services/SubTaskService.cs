@@ -21,24 +21,14 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Services
             var subTask = await _unitOfWork.SubtaskRepository.GetByIdAsync(id);
             if (subTask == null)
                 throw new Exception("Subtarefa não encontrada.");
-                
-            return new SubtaskResponseDto
-            {
-                Id = subTask.id,
-                Title = subTask.title,
-                IsCompleted = subTask.isCompleted,
-            };
+
+            return MapToResponseDto(subTask);
         }
 
         public async Task<List<SubtaskResponseDto>> GetAllAsync()
         {
             var subTasks = await _unitOfWork.SubtaskRepository.GetAllAsync();
-            return subTasks.Select(st => new SubtaskResponseDto
-            {
-                Id = st.id,
-                Title = st.title,
-                IsCompleted = st.isCompleted,
-            }).ToList();
+            return subTasks.Select(MapToResponseDto).ToList();
         }
 
         public async Task<SubTask> AddAsync(CreateSubtaskDto dto)
@@ -74,9 +64,19 @@ namespace api_gerenciamento_tarefas.Application.Features.SubTasks.Services
             var subTask = await _unitOfWork.SubtaskRepository.GetByIdAsync(id);
             if (subTask == null)
                 throw new Exception("Subtarefa não encontrada.");
-           
+
             await _unitOfWork.SubtaskRepository.DeleteAsync(subTask);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private static SubtaskResponseDto MapToResponseDto(SubTask subTask)
+        {
+            return new SubtaskResponseDto
+            {
+                Id = subTask.id,
+                Title = subTask.title,
+                IsCompleted = subTask.isCompleted,
+            };
         }
     }
 }

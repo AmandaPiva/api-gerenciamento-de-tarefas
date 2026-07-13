@@ -64,7 +64,5 @@ namespace api_gerenciamento_tarefas.Api.Controllers
             await _projectService.DeleteAsync(id);
             return NoContent();
         }
-
-
     }
 }
