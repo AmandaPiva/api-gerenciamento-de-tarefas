@@ -14,14 +14,17 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Validators
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("O nome do projeto é obrigatório.");
+
+            RuleFor(x => x.UserId)
+                .NotEmpty().WithMessage("O id do usuário é obrigatório.");
             
             RuleFor(x => x.CompletionDate)
-                .GreaterThan(DateTime.UtcNow)
+                .GreaterThan(x => DateTime.UtcNow)
                 .When(x => x.CompletionDate.HasValue)
                 .WithMessage("Data de conclusão deve ser futura");
 
             RuleFor(x => x.CreationDate)
-                .LessThanOrEqualTo(DateTime.UtcNow)
+                .LessThanOrEqualTo(x => DateTime.UtcNow)
                 .WithMessage("Data de criação deve ser no passado ou presente");
         }
     }
