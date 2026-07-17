@@ -13,7 +13,7 @@ namespace api_gerenciamento_tarefas.Application.Features.Projects.Interfaces
         public Task<List<Project>> GetAllAsync();
         public Task AddAsync(Project project);
         public Task UpdateAsync(Project project);
-        public Task DeleteAsync(Guid id);
+        public Task DeleteAsync(Project project);
         public Task<TaskItem?> AddTaskToProjectAsync(Guid projectId, TaskItem task);
     }
 }

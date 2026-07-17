@@ -45,7 +45,7 @@ namespace api_gerenciamento_tarefas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -141,7 +141,9 @@ namespace api_gerenciamento_tarefas.Migrations
                 {
                     b.HasOne("api_gerenciamento_tarefas.Domain.Entities.User", null)
                         .WithMany("Projects")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("api_gerenciamento_tarefas.Domain.Entities.SubTask", b =>
