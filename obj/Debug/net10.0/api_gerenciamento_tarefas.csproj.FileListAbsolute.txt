@@ -161,3 +161,4 @@ C:\Users\Amanda Piva\api_gerenciamento_tarefas\obj\Debug\net10.0\refint\api_gere
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\obj\Debug\net10.0\api_gerenciamento_tarefas.pdb
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\obj\Debug\net10.0\api_gerenciamento_tarefas.genruntimeconfig.cache
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\obj\Debug\net10.0\ref\api_gerenciamento_tarefas.dll
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

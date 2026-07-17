@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_gerenciamento_tarefas.Application.Features.SubTasks.DTO;
 using api_gerenciamento_tarefas.Application.Features.SubTasks.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api_gerenciamento_tarefas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class SubTaskController : ControllerBase
     {
         private readonly SubTaskService _subTaskService;

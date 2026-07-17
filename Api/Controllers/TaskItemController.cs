@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using api_gerenciamento_tarefas.Application.Features.Tasks.DTO;
 using api_gerenciamento_tarefas.Application.Features.Tasks.Interfaces;
@@ -8,6 +9,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TaskItemController : ControllerBase
     {
         private readonly ITaskItemService _taskItemService;

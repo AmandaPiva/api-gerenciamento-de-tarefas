@@ -36,6 +36,11 @@ namespace api_gerenciamento_tarefas.Infraestructure.Repositories
             return await _context.User.FindAsync(id);
         }
 
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.User.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
         public async Task UpdateAsync(User user)
         {
             _context.User.Update(user);

@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using api_gerenciamento_tarefas.Application.Features.Projects.DTO;
 using api_gerenciamento_tarefas.Application.Features.Projects.Services;
 using api_gerenciamento_tarefas.Application.Features.Tasks.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api_gerenciamento_tarefas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ProjectController : ControllerBase
     {
         private readonly ProjectService _projectService;

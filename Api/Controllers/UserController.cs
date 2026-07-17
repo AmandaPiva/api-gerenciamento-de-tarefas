@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_gerenciamento_tarefas.Application.Features.Users.DTO;
 using api_gerenciamento_tarefas.Application.Features.Users.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api_gerenciamento_tarefas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+   [Authorize]
     public class UserController : ControllerBase
     {
        private readonly UsersService _userService;
@@ -17,6 +19,21 @@ namespace api_gerenciamento_tarefas.Api.Controllers
         public UserController(UsersService usersService)
         {
             _userService = usersService;
+        }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto dto)
+        {
+            try
+            {
+                var response = await _userService.LoginAsync(dto);
+                return Ok(response);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
