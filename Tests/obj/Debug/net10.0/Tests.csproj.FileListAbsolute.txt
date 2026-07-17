@@ -235,3 +235,4 @@ C:\Users\Amanda Piva\api_gerenciamento_tarefas\Tests\obj\Debug\net10.0\Tests.pdb
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\Tests\obj\Debug\net10.0\Tests.genruntimeconfig.cache
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\Tests\obj\Debug\net10.0\ref\Tests.dll
 C:\Users\Amanda Piva\api_gerenciamento_tarefas\Tests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_Tests
+C:\Users\Amanda Piva\api_gerenciamento_tarefas\Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.InMemory.dll

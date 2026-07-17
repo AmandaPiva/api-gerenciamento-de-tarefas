@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v10.0": {
       "Tests/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.InMemory": "10.0.5",
           "Microsoft.NET.Test.Sdk": "17.14.1",
           "api_gerenciamento_tarefas": "1.0.0",
           "xunit": "2.9.3"
@@ -521,6 +522,17 @@
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/10.0.5": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.5"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
             "assemblyVersion": "10.0.5.0",
             "fileVersion": "10.0.526.15411"
           }
@@ -1312,6 +1324,13 @@
       "sha512": "sha512-gm6f0cC2w/2tcd4GeZJqEMruTercpIJfO5sSAFLtqTqblDBHgAFk70xwshUIUVX4I6sZwdEUSd1YxoKFk1AL0w==",
       "path": "microsoft.entityframeworkcore.design/10.0.5",
       "hashPath": "microsoft.entityframeworkcore.design.10.0.5.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zz4THzlDOrJ7fKU2YUOzQFs2LJ9DgOSr5xFXcDdoD59el73MTQLtQQOAJxQ94F4XDegyL9+2sePSQGdcU25ZxQ==",
+      "path": "microsoft.entityframeworkcore.inmemory/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.10.0.5.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
       "type": "package",
