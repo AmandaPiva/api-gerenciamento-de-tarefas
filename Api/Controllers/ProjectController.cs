@@ -41,7 +41,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
             return Ok(project);
         }
 
-        [HttpPut("/UpdateProject/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProjectDto dto, Guid id)
         {
             if (id != dto.Id)

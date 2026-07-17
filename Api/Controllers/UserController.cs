@@ -40,7 +40,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
             return Ok(user);
         }
 
-        [HttpPut("/UpdateUser/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserDto dto, Guid id)
         {
             if (id != dto.Id)
@@ -50,7 +50,7 @@ namespace api_gerenciamento_tarefas.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("/DeleteUser/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             await _userService.DeleteAsync(id);
